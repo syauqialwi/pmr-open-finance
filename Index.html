@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PMR Open Finance</title>
+<style>
+:root{--red:#d62839;--red2:#ef476f;--bg:#f5f6f8;--card:#fff;--text:#20242a;--muted:#737981;--line:#e7e9ed;--green:#159957;--blue:#3478f6;--shadow:0 8px 28px rgba(25,30,40,.07)}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
+button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}.app{display:flex;min-height:100vh}.sidebar{width:245px;background:#fff;border-right:1px solid var(--line);padding:22px 14px;position:fixed;inset:0 auto 0 0;z-index:10}.brand{display:flex;gap:11px;align-items:center;padding:4px 8px 24px}.logo{width:42px;height:42px;border-radius:13px;background:var(--red);color:white;display:grid;place-items:center;font-weight:900}.brand b{display:block}.brand small{color:var(--muted)}.nav{display:grid;gap:5px}.nav button{background:none;text-align:left;padding:12px 13px;border-radius:12px;color:#626871;display:flex;gap:11px;align-items:center}.nav button.active,.nav button:hover{background:#fff0f2;color:var(--red);font-weight:700}.main{margin-left:245px;width:calc(100% - 245px);padding:28px;max-width:1500px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}.top h1{font-size:25px;margin:0 0 5px}.top p{margin:0;color:var(--muted)}.actions{display:flex;gap:8px}.btn{padding:11px 15px;border-radius:11px;font-weight:700;background:#fff;border:1px solid var(--line)}.btn.red{background:var(--red);color:#fff;border-color:var(--red)}.btn.green{background:#eaf8f0;color:var(--green);border-color:#ccebd9}.btn.danger{background:#fff0f1;color:#c52335}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);min-width:0}.stat{padding:19px;min-width:0}.stat .label{color:var(--muted);font-size:13px}.stat .value{font-size:25px;font-weight:800;margin:8px 0 2px;overflow-wrap:anywhere;word-break:break-word}.stat .sub{font-size:12px;color:var(--muted)}.grid{display:grid;grid-template-columns:1.25fr 1fr;gap:16px;margin-top:16px}.panel{padding:19px}.panel h3{margin:0 0 14px;font-size:16px}.chart{height:230px;display:flex;align-items:end;gap:16px;padding:10px 8px 0}.bars{height:190px;display:flex;align-items:end;gap:12px;flex:1}.barGroup{height:100%;display:flex;align-items:end;gap:4px;flex:1;justify-content:center}.bar{width:18px;border-radius:6px 6px 2px 2px}.bar.in{background:#4f8df7}.bar.out{background:var(--red)}.axis{display:flex;gap:12px;color:var(--muted);font-size:11px;text-align:center}.axis span{flex:1}.legend{display:flex;gap:14px;font-size:12px;color:var(--muted);margin-bottom:8px}.dot{width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:5px}.donut{display:flex;align-items:center;gap:24px;height:190px}.ring{width:145px;height:145px;border-radius:50%;background:conic-gradient(var(--red) 0 33%,#3478f6 33% 100%);position:relative}.ring:after{content:"";position:absolute;inset:32px;background:#fff;border-radius:50%}.donut b{font-size:21px}.page{display:none}.page.active{display:block}.tableWrap{overflow:auto}.table{width:100%;border-collapse:collapse;min-width:760px}.table th,.table td{padding:12px 10px;border-bottom:1px solid var(--line);text-align:left;font-size:13px}.table th{color:var(--muted);font-weight:600}.pill{padding:5px 8px;border-radius:999px;font-size:11px;font-weight:700}.pill.in{background:#eaf8f0;color:var(--green)}.pill.out{background:#fff0f1;color:var(--red)}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.toolbar input,.toolbar select,.field input,.field select,.field textarea{border:1px solid var(--line);border-radius:10px;padding:10px 11px;background:#fff;outline:none;width:100%}.toolbar input{max-width:260px}.eventGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}.event{padding:17px;min-width:0}.event h3{margin:0 0 6px}.event .amount{font-size:21px;font-weight:800;margin:10px 0;overflow-wrap:anywhere;word-break:break-word}.progress{height:8px;background:#eceef1;border-radius:99px;overflow:hidden}.progress i{display:block;height:100%;background:var(--red);border-radius:99px}.muted{color:var(--muted);font-size:12px}.row{display:flex;justify-content:space-between;gap:12px;align-items:center}.modal{position:fixed;inset:0;background:rgba(15,18,24,.45);display:none;place-items:center;z-index:50;padding:16px}.modal.open{display:grid}.modalBox{background:#fff;border-radius:18px;width:min(620px,100%);max-height:92vh;overflow:auto;padding:20px}.modalBox h2{margin:0 0 16px}.formGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:5px}.field.full{grid-column:1/-1}.formActions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}.toast{position:fixed;right:20px;bottom:80px;background:#20242a;color:#fff;padding:12px 15px;border-radius:10px;display:none;z-index:70}.mobileNav{display:none}.empty{padding:35px;text-align:center;color:var(--muted)}.log{display:grid;gap:10px}.logItem{padding:13px;border:1px solid var(--line);border-radius:12px;background:#fff}.logItem b{font-size:13px}.logItem small{display:block;color:var(--muted);margin-top:4px}
+@media(max-width:900px){.sidebar{display:none}.main{margin:0;width:100%;padding:18px 14px 85px}.stats{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}.eventGrid{grid-template-columns:1fr}.mobileNav{position:fixed;display:grid;grid-template-columns:repeat(5,1fr);bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);z-index:20;padding:6px 3px}.mobileNav button{background:none;font-size:10px;color:#666;padding:6px 2px}.mobileNav button.active{color:var(--red);font-weight:800}.mobileNav span{display:block;font-size:18px;margin-bottom:2px}.top{align-items:flex-start}.top .actions .optional{display:none}.formGrid{grid-template-columns:1fr}.field.full{grid-column:auto}.ring{width:120px;height:120px}.donut{gap:15px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand"><div class="logo">✚</div><div><b>PMR Open Finance</b><small>Terbuka dalam Dana</small></div></div>
+  <nav class="nav">
+    <button data-page="dashboard" class="active">⌂ Dashboard</button>
+    <button data-page="transaksi">↕ Transaksi</button>
+    <button data-page="kegiatan">▣ Kegiatan</button>
+    <button data-page="transparansi">◉ Transparansi</button>
+    <button data-page="laporan">▤ Laporan</button>
+    <button data-page="log">◷ Activity Log</button>
+  </nav>
+  <div id="userBox" class="userBox"></div>
+</aside>
+<main class="main">
+  <section id="dashboard" class="page active">
+    <div class="top"><div><h1>Dashboard</h1><p>Ringkasan keuangan PMR secara real-time.</p></div><div class="actions"><button class="btn green admin-only" onclick="openTx('in')">+ Uang Masuk</button><button class="btn red admin-only" onclick="openTx('out')">− Uang Keluar</button></div></div>
+    <div class="stats" id="stats"></div>
+    <div class="grid">
+      <div class="card panel"><h3>Pemasukan vs Pengeluaran</h3><div class="legend"><span><i class="dot" style="background:#4f8df7"></i>Masuk</span><span><i class="dot" style="background:#d62839"></i>Keluar</span></div><div id="monthChart" class="chart"></div></div>
+      <div class="card panel"><h3>Kas PMR vs Dana BOS</h3><div class="donut"><div id="ring" class="ring"></div><div><div><b id="kasPct">0%</b> Kas PMR</div><div style="margin-top:14px"><b id="bosPct">0%</b> Dana BOS</div><p class="muted">Komposisi saldo saat ini.</p></div></div></div>
+    </div>
+    <div class="card panel" style="margin-top:16px"><h3>Pengeluaran berdasarkan kegiatan</h3><div id="eventBars"></div></div>
+  </section>
+
+  <section id="transaksi" class="page">
+    <div class="top"><div><h1>Transaksi</h1><p>Semua pemasukan dan pengeluaran tercatat di sini.</p></div><div class="actions"><button class="btn green admin-only" onclick="openTx('in')">+ Uang Masuk</button><button class="btn red admin-only" onclick="openTx('out')">− Uang Keluar</button></div></div>
+    <div class="card panel"><div class="toolbar"><input id="search" placeholder="Cari transaksi..." oninput="renderTransactions()"><select id="typeFilter" onchange="renderTransactions()"><option value="">Semua jenis</option><option value="in">Uang masuk</option><option value="out">Uang keluar</option></select><select id="sourceFilter" onchange="renderTransactions()"><option value="">Semua sumber</option><option>Kas PMR</option><option>Dana BOS</option><option>Donasi</option><option>Lainnya</option></select><select id="eventFilter" onchange="renderTransactions()"><option value="">Semua kegiatan</option></select></div><div class="tableWrap"><table class="table"><thead><tr><th>Tanggal</th><th>Jenis</th><th>Keterangan</th><th>Kegiatan</th><th>Sumber</th><th>Nominal</th><th>Penginput</th><th></th></tr></thead><tbody id="txBody"></tbody></table></div></div>
+  </section>
+
+  <section id="kegiatan" class="page">
+    <div class="top"><div><h1>Kegiatan / Event</h1><p>Anggaran, sumber dana, dan penggunaan setiap kegiatan.</p></div><button class="btn red admin-only" onclick="openEvent()">+ Kegiatan</button></div>
+    <div id="eventGrid" class="eventGrid"></div>
+  </section>
+
+  <section id="transparansi" class="page">
+    <div class="top"><div><h1>Transparansi</h1><p>Informasi keuangan yang mudah dipahami anggota.</p></div></div>
+    <div class="stats" id="publicStats"></div>
+    <div class="card panel" style="margin-top:16px"><h3>Kegiatan Terbaru</h3><div id="publicEvents"></div></div>
+    <div class="card panel" style="margin-top:16px"><h3>Transaksi Terbaru</h3><div class="tableWrap"><table class="table"><thead><tr><th>Tanggal</th><th>Jenis</th><th>Keterangan</th><th>Kegiatan</th><th>Sumber</th><th>Nominal</th></tr></thead><tbody id="publicTx"></tbody></table></div></div>
+  </section>
+
+  <section id="laporan" class="page">
+    <div class="printOnly"><h1 style="margin:0 0 4px">PMR OPEN FINANCE</h1><p style="margin:0;color:#555">Laporan Keuangan · dicetak <span id="printDate"></span></p></div>
+    <div class="top"><div><h1>Laporan Keuangan</h1><p>Ringkasan yang bisa diekspor.</p></div><div class="actions"><button class="btn" onclick="exportCSV()">Export CSV</button><button class="btn red" onclick="window.print()">Download PDF</button><button class="btn" onclick="exportJSON()">Backup Data (JSON)</button><button class="btn admin-only" onclick="document.getElementById('importFile').click()">Impor Backup</button><input type="file" id="importFile" accept="application/json" style="display:none" onchange="importJSONFile(this.files[0])"><button class="btn danger admin-only" onclick="resetData()">Reset ke Kosong</button></div></div>
+    <div class="card panel"><div class="toolbar"><select id="reportMode" onchange="renderReport()"><option value="all">Semua transaksi</option><option value="month">Per bulan</option><option value="event">Per kegiatan</option><option value="source">Berdasarkan sumber dana</option></select><select id="reportValue" onchange="renderReport()"></select></div><div id="report"></div></div>
+  </section>
+
+  <section id="log" class="page">
+    <div class="top"><div><h1>Activity Log</h1><p>Jejak perubahan data untuk menjaga transparansi.</p></div></div>
+    <div class="card panel"><div id="logList" class="log"></div></div>
+  </section>
+</main>
+</div>
+<div class="mobileNav">
+ <button data-page="dashboard" class="active"><span>⌂</span>Dashboard</button><button data-page="transaksi"><span>↕</span>Transaksi</button><button data-page="kegiatan"><span>▣</span>Kegiatan</button><button data-page="transparansi"><span>◉</span>Transparansi</button><button data-page="laporan"><span>☰</span>Lainnya</button>
+</div>
+<button id="mobileLogout" class="mobileLogoutBtn" onclick="PMRLogout()">⎋ Keluar</button>
+<div id="modal" class="modal"><div class="modalBox"><div id="modalContent"></div></div></div><div id="toast" class="toast"></div>
+
+<script>
+const KEY='pmr_open_finance_v2';
+const demo={
+  currentUser:'Bendahara 1',
+  transactions:[],
+  events:[],
+  logs:[]
+};
+let db=JSON.parse(localStorage.getItem(KEY)||'null')||demo;
+function save(){localStorage.setItem(KEY,JSON.stringify(db))}
+function rup(n){return new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',maximumFractionDigits:0}).format(n)}
+function toast(s){const e=document.getElementById('toast');e.textContent=s;e.style.display='block';setTimeout(()=>e.style.display='none',2200)}
+function uid(prefix){return prefix+'-'+Date.now().toString(36).toUpperCase()}
+function balances(){let b={'Kas PMR':0,'Dana BOS':0,'Donasi':0,'Lainnya':0};db.transactions.forEach(t=>b[t.source]=(b[t.source]||0)+(t.type==='in'?t.amount:-t.amount));return b}
+function spentEvent(name){return db.transactions.filter(t=>t.type==='out'&&t.event===name).reduce((a,t)=>a+t.amount,0)}
+function setPage(id){
+ document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===id));
+ document.querySelectorAll('[data-page]').forEach(x=>x.classList.toggle('active',x.dataset.page===id));
+ if(id==='dashboard')renderDashboard(); if(id==='transaksi')renderTransactions(); if(id==='kegiatan')renderEvents(); if(id==='transparansi')renderTransparency(); if(id==='laporan')renderReport(); if(id==='log')renderLogs();
+}
+document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>setPage(b.dataset.page));
+
+function renderDashboard(){
+ const b=balances(), inc=db.transactions.filter(t=>t.type==='in').reduce((a,t)=>a+t.amount,0), out=db.transactions.filter(t=>t.type==='out').reduce((a,t)=>a+t.amount,0);
+ document.getElementById('stats').innerHTML=[
+  ['Saldo Kas PMR',rup(b['Kas PMR']),'Transaksi terhitung otomatis'],
+  ['Saldo Dana BOS',rup(b['Dana BOS']),'Transaksi terhitung otomatis'],
+  ['Total pemasukan',rup(inc),'Semua sumber dana'],
+  ['Total pengeluaran',rup(out),`${db.transactions.filter(t=>t.type==='out'&&t.date.slice(0,7)==='2026-09').length} transaksi bulan ini`]
+ ].map(x=>`<div class="card stat"><div class="label">${x[0]}</div><div class="value">${x[1]}</div><div class="sub">${x[2]}</div></div>`).join('');
+ const kasPos=Math.max(b['Kas PMR'],0), bosPos=Math.max(b['Dana BOS'],0), totalPos=kasPos+bosPos;
+ const kp=totalPos>0?Math.round(kasPos/totalPos*100):0, bp=totalPos>0?100-kp:0;
+ document.getElementById('ring').style.background=`conic-gradient(var(--red) 0 ${kp}%,#3478f6 ${kp}% 100%)`;document.getElementById('kasPct').textContent=kp+'%';document.getElementById('bosPct').textContent=bp+'%';
+ const months=['Apr','Mei','Jun','Jul','Agu','Sep'];let vals=months.map((m,i)=>{let ym=['2026-04','2026-05','2026-06','2026-07','2026-08','2026-09'][i];return [db.transactions.filter(t=>t.date.startsWith(ym)&&t.type==='in').reduce((a,t)=>a+t.amount,0),db.transactions.filter(t=>t.date.startsWith(ym)&&t.type==='out').reduce((a,t)=>a+t.amount,0)]});let max=Math.max(...vals.flat(),1);
+ document.getElementById('monthChart').innerHTML=`<div class="bars">${vals.map(v=>`<div class="barGroup"><div class="bar in" title="${rup(v[0])}" style="height:${Math.max(3,v[0]/max*170)}px"></div><div class="bar out" title="${rup(v[1])}" style="height:${Math.max(3,v[1]/max*170)}px"></div></div>`).join('')}</div><div class="axis">${months.map(m=>`<span>${m}</span>`).join('')}</div>`;
+ document.getElementById('eventBars').innerHTML=db.events.map(e=>{let s=spentEvent(e.name),p=Math.min(100,e.budget?s/e.budget*100:0);return `<div style="margin:14px 0"><div class="row"><b>${e.name}</b><span class="muted">${rup(s)} / ${rup(e.budget)}</span></div><div class="progress" style="margin-top:7px"><i style="width:${p}%"></i></div></div>`}).join('');
+}
+function renderTransactions(){
+ const q=(document.getElementById('search')?.value||'').toLowerCase(),tf=document.getElementById('typeFilter')?.value||'',sf=document.getElementById('sourceFilter')?.value||'',ef=document.getElementById('eventFilter')?.value||'';
+ const opts=['<option value="">Semua kegiatan</option>',...db.events.map(e=>`<option ${ef===e.name?'selected':''}>${e.name}</option>`)].join('');document.getElementById('eventFilter').innerHTML=opts;
+ let arr=db.transactions.filter(t=>(!tf||t.type===tf)&&(!sf||t.source===sf)&&(!ef||t.event===ef)&&(!q||JSON.stringify(t).toLowerCase().includes(q))).sort((a,b)=>b.date.localeCompare(a.date));
+ document.getElementById('txBody').innerHTML=arr.length?arr.map(t=>`<tr><td>${t.date}</td><td><span class="pill ${t.type}">${t.type==='in'?'MASUK':'KELUAR'}</span></td><td>${t.note||t.category}</td><td>${t.event||'—'}</td><td>${t.source}</td><td><b>${t.type==='in'?'+':'−'} ${rup(t.amount)}</b></td><td>${t.user}</td><td style="white-space:nowrap"><button class="btn admin-only" onclick="openTx('${t.type}','${t.id}')">Edit</button> <button class="btn danger admin-only" onclick="delTx('${t.id}')">Hapus</button></td></tr>`).join(''):`<tr><td colspan="8" class="empty">Tidak ada transaksi.</td></tr>`;
+ if(window.PMRApplyAccess) window.PMRApplyAccess();
+}
+function openTx(type,id){
+ if(window.PMRAuth && window.PMRAuth.isGuest){toast('Mode tamu hanya dapat melihat data.');return}
+ const editing=!!id;
+ const t=editing?db.transactions.find(x=>x.id===id):null;
+ if(editing && !t){toast('Transaksi tidak ditemukan');return}
+ const defaultUser=(window.PMRAuth&&window.PMRAuth.name)||db.currentUser;
+ document.getElementById('modalContent').innerHTML=`<h2>${editing?'Edit Transaksi':(type==='in'?'+ Uang Masuk':'− Uang Keluar')}</h2><form onsubmit="submitTx(event,'${type}','${editing?t.id:''}')"><div class="formGrid">
+ <div class="field"><label>Tanggal</label><input id="fdate" type="date" value="${editing?t.date:new Date().toISOString().slice(0,10)}" required></div>
+ <div class="field"><label>Nominal</label><input id="famount" type="number" min="1" required value="${editing?t.amount:''}" placeholder="100000"></div>
+ <div class="field"><label>Sumber dana</label><select id="fsource">${['Kas PMR','Dana BOS','Donasi','Lainnya'].map(s=>`<option ${editing&&t.source===s?'selected':''}>${s}</option>`).join('')}</select></div>
+ <div class="field"><label>Kategori</label><input id="fcat" required value="${editing?t.category:''}" placeholder="${type==='in'?'Kas / Donasi':'Konsumsi / ATK / P3K'}"></div>
+ ${type==='out'?`<div class="field"><label>Kegiatan / event</label><select id="fevent"><option value="">Tanpa kegiatan</option>${db.events.map(e=>`<option ${editing&&t.event===e.name?'selected':''}>${e.name}</option>`).join('')}</select></div>`:''}
+ <div class="field"><label>Penginput</label><input id="fuser" value="${editing?t.user:defaultUser}" required></div>
+ <div class="field full"><label>Keterangan</label><textarea id="fnote" rows="3" placeholder="Jelaskan penggunaan dana...">${editing?(t.note||''):''}</textarea></div>
+ </div><div class="formActions"><button type="button" class="btn" onclick="closeModal()">Batal</button><button class="btn red">${editing?'Simpan Perubahan':'Simpan Transaksi'}</button></div></form>`;
+ document.getElementById('modal').classList.add('open')
+}
+function submitTx(ev,type,id){
+ ev.preventDefault();
+ if(window.PMRAuth && window.PMRAuth.isGuest){toast('Mode tamu hanya dapat melihat data.');return}
+ const amt=+famount.value;
+ if(amt>=100000000 && !confirm(`Nominal ${rup(amt)} ini sangat besar. Pastikan tidak salah ketik jumlah nolnya. Lanjutkan simpan?`)){return}
+ const editing=!!id;
+ if(editing){
+  let t=db.transactions.find(x=>x.id===id);
+  if(!t){toast('Transaksi tidak ditemukan');closeModal();return}
+  t.date=fdate.value;t.amount=amt;t.source=fsource.value;t.category=fcat.value;t.event=type==='out'?fevent.value:'';t.note=fnote.value;t.user=fuser.value;
+  db.logs.unshift({at:new Date().toLocaleString('id-ID'),user:(window.PMRAuth&&window.PMRAuth.name)||db.currentUser,text:`mengubah transaksi ${t.id} (${rup(t.amount)}).`});
+  toast('Perubahan transaksi disimpan');
+ }else{
+  let t={id:uid('TX'),date:fdate.value,amount:amt,type,source:fsource.value,category:fcat.value,event:type==='out'?fevent.value:'',note:fnote.value,user:fuser.value};
+  db.transactions.push(t);
+  db.logs.unshift({at:new Date().toLocaleString('id-ID'),user:t.user,text:`menambahkan ${type==='in'?'pemasukan':'pengeluaran'} ${rup(t.amount)}${t.event?' untuk kegiatan '+t.event:''}.`});
+  toast('Transaksi berhasil disimpan');
+ }
+ save();closeModal();renderDashboard();renderTransactions();renderTransparency();renderReport();renderLogs()
+}
+function delTx(id){if(window.PMRAuth && window.PMRAuth.isGuest){toast('Mode tamu hanya dapat melihat data.');return}let t=db.transactions.find(x=>x.id===id);if(!t)return;if(!confirm('Hapus transaksi ini? Perubahan akan dicatat di Activity Log.'))return;db.transactions=db.transactions.filter(x=>x.id!==id);db.logs.unshift({at:new Date().toLocaleString('id-ID'),user:(window.PMRAuth&&window.PMRAuth.name)||db.currentUser,text:`menghapus transaksi ${t.id} sebesar ${rup(t.amount)}.`});save();renderTransactions();renderDashboard();renderTransparency();renderReport();renderLogs();toast('Transaksi dihapus dan dicatat')}
+function openEvent(id){
+ if(window.PMRAuth && window.PMRAuth.isGuest){toast('Mode tamu hanya dapat melihat data.');return}
+ const editing=!!id;
+ const e=editing?db.events.find(x=>x.id===id):null;
+ if(editing && !e){toast('Kegiatan tidak ditemukan');return}
+ document.getElementById('modalContent').innerHTML=`<h2>${editing?'Edit Kegiatan':'Tambah Kegiatan'}</h2><form onsubmit="submitEvent(event,'${editing?e.id:''}')"><div class="formGrid"><div class="field full"><label>Nama kegiatan</label><input id="ename" required value="${editing?e.name:''}" placeholder="Humanity Day"></div><div class="field"><label>Total anggaran</label><input id="ebudget" type="number" min="0" required value="${editing?e.budget:''}"></div><div class="field"><label>Dana Kas PMR</label><input id="ekas" type="number" min="0" required value="${editing?e.kas:''}"></div><div class="field"><label>Dana BOS</label><input id="ebos" type="number" min="0" required value="${editing?e.bos:''}"></div><div class="field full"><label>Deskripsi</label><textarea id="edesc" rows="3">${editing?(e.desc||''):''}</textarea></div></div><div class="formActions"><button type="button" class="btn" onclick="closeModal()">Batal</button><button class="btn red">${editing?'Simpan Perubahan':'Buat Kegiatan'}</button></div></form>`;document.getElementById('modal').classList.add('open')}
+function submitEvent(ev,id){
+ ev.preventDefault();
+ if(window.PMRAuth && window.PMRAuth.isGuest){toast('Mode tamu hanya dapat melihat data.');return}
+ const editing=!!id;
+ if(editing){
+  let e=db.events.find(x=>x.id===id);
+  if(!e){toast('Kegiatan tidak ditemukan');closeModal();return}
+  const oldName=e.name;
+  e.name=ename.value;e.budget=+ebudget.value;e.kas=+ekas.value;e.bos=+ebos.value;e.desc=edesc.value;
+  if(oldName!==e.name){db.transactions.forEach(t=>{if(t.event===oldName)t.event=e.name})}
+  db.logs.unshift({at:new Date().toLocaleString('id-ID'),user:(window.PMRAuth&&window.PMRAuth.name)||db.currentUser,text:`mengubah kegiatan ${e.name}.`});
+  toast('Perubahan kegiatan disimpan');
+ }else{
+  let e={id:uid('EV'),name:ename.value,budget:+ebudget.value,kas:+ekas.value,bos:+ebos.value,desc:edesc.value};
+  db.events.push(e);
+  db.logs.unshift({at:new Date().toLocaleString('id-ID'),user:(window.PMRAuth&&window.PMRAuth.name)||db.currentUser,text:`membuat kegiatan ${e.name}.`});
+  toast('Kegiatan dibuat');
+ }
+ save();closeModal();renderEvents();renderDashboard();renderTransactions();renderTransparency();renderLogs()
+}
+function delEvent(id){
+ if(window.PMRAuth && window.PMRAuth.isGuest){toast('Mode tamu hanya dapat melihat data.');return}
+ let e=db.events.find(x=>x.id===id);
+ if(!e)return;
+ const used=db.transactions.some(t=>t.event===e.name);
+ const warn=used?' Transaksi yang sudah tercatat untuk kegiatan ini akan tetap ada, hanya tautannya ke kegiatan ini yang hilang.':'';
+ if(!confirm(`Hapus kegiatan "${e.name}"?${warn}`))return;
+ db.events=db.events.filter(x=>x.id!==id);
+ db.logs.unshift({at:new Date().toLocaleString('id-ID'),user:(window.PMRAuth&&window.PMRAuth.name)||db.currentUser,text:`menghapus kegiatan ${e.name}.`});
+ save();renderEvents();renderDashboard();renderTransactions();renderTransparency();renderLogs();toast('Kegiatan dihapus')
+}
+function renderEvents(){document.getElementById('eventGrid').innerHTML=db.events.map(e=>{let s=spentEvent(e.name),p=Math.min(100,e.budget?s/e.budget*100:0),bySource=db.transactions.filter(t=>t.type==='out'&&t.event===e.name).reduce((a,t)=>(a[t.source]=(a[t.source]||0)+t.amount,a),{});return `<div class="card event"><div class="row"><span class="pill out">${Math.round(p)}% terpakai</span><span class="muted">${e.id}</span></div><h3 style="margin-top:13px">${e.name}</h3><p class="muted">${e.desc||'Tidak ada deskripsi.'}</p><div class="amount">${rup(e.budget)}</div><div class="muted">Kas: ${rup(e.kas)} · BOS: ${rup(e.bos)}</div><div class="progress" style="margin:12px 0"><i style="width:${p}%"></i></div><div class="row"><span class="muted">Terpakai</span><b>${rup(s)}</b></div><div class="row"><span class="muted">Sisa</span><b>${rup(Math.max(0,e.budget-s))}</b></div><hr style="border:0;border-top:1px solid var(--line);margin:14px 0"><b>Penggunaan Dana</b>${Object.entries(bySource).map(([k,v])=>`<div class="row" style="margin-top:8px"><span class="muted">${k}</span><span>${rup(v)}</span></div>`).join('')||'<p class="muted">Belum ada transaksi.</p>'}<div class="row admin-only" style="margin-top:14px;gap:8px"><button class="btn" style="flex:1" onclick="openEvent('${e.id}')">Edit</button><button class="btn danger" style="flex:1" onclick="delEvent('${e.id}')">Hapus</button></div></div>`}).join('');if(window.PMRApplyAccess) window.PMRApplyAccess();}
+function renderTransparency(){let b=balances();document.getElementById('publicStats').innerHTML=[['Kas PMR',rup(b['Kas PMR'])],['Dana BOS',rup(b['Dana BOS'])],['Total dana',rup(b['Kas PMR']+b['Dana BOS'])]].map(x=>`<div class="card stat"><div class="label">${x[0]}</div><div class="value">${x[1]}</div></div>`).join('');document.getElementById('publicEvents').innerHTML=db.events.map(e=>`<div style="padding:14px 0;border-bottom:1px solid var(--line)"><div class="row"><b>${e.name}</b><b>${rup(e.budget)}</b></div><div class="muted" style="margin-top:6px">Kas: ${rup(e.kas)} · BOS: ${rup(e.bos)} · Terpakai: ${rup(spentEvent(e.name))}</div></div>`).join('');document.getElementById('publicTx').innerHTML=db.transactions.slice().sort((a,b)=>b.date.localeCompare(a.date)).slice(0,8).map(t=>`<tr><td>${t.date}</td><td><span class="pill ${t.type}">${t.type==='in'?'MASUK':'KELUAR'}</span></td><td>${t.note||t.category}</td><td>${t.event||'—'}</td><td>${t.source}</td><td>${t.type==='in'?'+':'−'} ${rup(t.amount)}</td></tr>`).join('')}
+function renderReport(){let mode=document.getElementById('reportMode').value,rv=document.getElementById('reportValue');let vals=mode==='month'?['2026-09','2026-08','2026-07','2026-06']:mode==='event'?db.events.map(e=>e.name):mode==='source'?['Kas PMR','Dana BOS','Donasi','Lainnya']:['all'];rv.innerHTML=vals.map(v=>`<option>${v}</option>`).join('');let val=rv.value;let arr=db.transactions;if(mode==='month')arr=arr.filter(t=>t.date.startsWith(val));if(mode==='event')arr=arr.filter(t=>t.event===val);if(mode==='source')arr=arr.filter(t=>t.source===val);let inc=arr.filter(t=>t.type==='in').reduce((a,t)=>a+t.amount,0),out=arr.filter(t=>t.type==='out').reduce((a,t)=>a+t.amount,0);document.getElementById('report').innerHTML=`<div class="stats"><div class="card stat"><div class="label">Pemasukan</div><div class="value">${rup(inc)}</div></div><div class="card stat"><div class="label">Pengeluaran</div><div class="value">${rup(out)}</div></div><div class="card stat"><div class="label">Selisih</div><div class="value">${rup(inc-out)}</div></div></div><div style="margin-top:18px" class="tableWrap"><table class="table"><thead><tr><th>Tanggal</th><th>Jenis</th><th>Keterangan</th><th>Kegiatan</th><th>Sumber</th><th>Nominal</th></tr></thead><tbody>${arr.map(t=>`<tr><td>${t.date}</td><td>${t.type==='in'?'Masuk':'Keluar'}</td><td>${t.note||t.category}</td><td>${t.event||'—'}</td><td>${t.source}</td><td>${rup(t.amount)}</td></tr>`).join('')}</tbody></table></div>`}
+function exportCSV(){let rows=[['ID','Tanggal','Jenis','Nominal','Sumber','Kategori','Kegiatan','Keterangan','Penginput'],...db.transactions.map(t=>[t.id,t.date,t.type,t.amount,t.source,t.category,t.event,t.note,t.user])];let csv=rows.map(r=>r.map(v=>`"${String(v??'').replaceAll('"','""')}"`).join(',')).join('\n');let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='pmr-open-finance.csv';a.click();URL.revokeObjectURL(a.href)}
+function exportJSON(){const blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='pmr-open-finance-backup-'+new Date().toISOString().slice(0,10)+'.json';a.click();URL.revokeObjectURL(a.href)}
+function importJSONFile(file){
+ if(!file)return;
+ if(window.PMRAuth && window.PMRAuth.isGuest){toast('Mode tamu tidak dapat mengimpor data.');document.getElementById('importFile').value='';return}
+ if(!confirm('Impor akan MENGGANTI seluruh transaksi, kegiatan, dan log yang ada saat ini di perangkat ini dengan isi file backup. Lanjutkan?')){document.getElementById('importFile').value='';return}
+ const reader=new FileReader();
+ reader.onload=function(ev){
+  try{
+   const parsed=JSON.parse(ev.target.result);
+   if(!parsed||!Array.isArray(parsed.transactions)||!Array.isArray(parsed.events))throw new Error('invalid');
+   db=parsed;
+   db.logs=db.logs||[];
+   db.logs.unshift({at:new Date().toLocaleString('id-ID'),user:(window.PMRAuth&&window.PMRAuth.name)||db.currentUser||'Admin',text:'mengimpor data dari file backup.'});
+   save();
+   renderDashboard();renderTransactions();renderEvents();renderTransparency();renderReport();renderLogs();
+   toast('Data berhasil diimpor');
+  }catch(err){
+   toast('Gagal impor: file backup tidak valid');
+  }
+  document.getElementById('importFile').value='';
+ };
+ reader.readAsText(file);
+}
+function resetData(){
+ if(window.PMRAuth && window.PMRAuth.isGuest){toast('Mode tamu tidak dapat mereset data.');return}
+ if(!confirm('PERINGATAN: ini akan MENGHAPUS SEMUA transaksi, kegiatan, dan log di perangkat ini secara permanen. Sebaiknya klik "Backup Data (JSON)" dulu sebelum lanjut. Yakin ingin mengosongkan semua data?'))return;
+ if(prompt('Ketik RESET (huruf besar) untuk konfirmasi terakhir:')!=='RESET'){toast('Reset dibatalkan');return}
+ db={currentUser:db.currentUser,transactions:[],events:[],logs:[]};
+ db.logs.unshift({at:new Date().toLocaleString('id-ID'),user:(window.PMRAuth&&window.PMRAuth.name)||db.currentUser,text:'mereset seluruh data ke kosong.'});
+ save();
+ renderDashboard();renderTransactions();renderEvents();renderTransparency();renderReport();renderLogs();
+ toast('Semua data telah dikosongkan');
+}
+function renderLogs(){document.getElementById('logList').innerHTML=db.logs.map(l=>`<div class="logItem"><b>${l.user}</b> ${l.text}<small>${l.at}</small></div>`).join('')}
+function closeModal(){document.getElementById('modal').classList.remove('open')}
+document.getElementById('modal').onclick=e=>{if(e.target.id==='modal')closeModal()}
+window.addEventListener('beforeprint',()=>{const el=document.getElementById('printDate');if(el)el.textContent=new Date().toLocaleString('id-ID')});
+renderDashboard();renderTransactions();renderEvents();renderTransparency();renderReport();renderLogs();
+</script>
+
+<div id="authOverlay">
+  <div class="auth-card">
+    <h1>PMR OPEN FINANCE</h1>
+    <p>Terbuka dalam Dana, Terpercaya dalam Aksi.</p>
+    <div id="authError" class="auth-error"></div>
+    <label>Nama akun</label>
+    <input id="authUsername" autocomplete="username" placeholder="Bendahara 1 / Bendahara 2">
+    <label>Password</label>
+    <input id="authPassword" type="password" autocomplete="current-password" placeholder="Masukkan password">
+    <button id="authLogin">Masuk sebagai Admin</button>
+    <div style="text-align:center;margin:18px 0;color:#9ca3af">atau</div>
+    <button id="authGuest" style="background:#fff;color:#222;border:1px solid #ddd">Masuk sebagai Tamu</button>
+    <p style="font-size:12px;margin-top:18px">Tamu hanya dapat melihat data. Hanya Bendahara 1 dan Bendahara 2 yang dapat mengubah data.</p>
+  </div>
+</div>
+
+<style>
+#authOverlay{position:fixed;inset:0;background:#f5f6f8;z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px}
+.auth-card{width:min(430px,100%);background:#fff;border:1px solid #e7e7e7;border-radius:22px;padding:28px;box-shadow:0 18px 60px rgba(0,0,0,.10)}
+.auth-card h1{margin:0 0 6px}.auth-card p{color:#6b7280;margin:0 0 22px}.auth-card input{width:100%;box-sizing:border-box;padding:13px;border:1px solid #d9dde3;border-radius:12px;margin:6px 0 12px}.auth-card button{width:100%;padding:13px;border:0;border-radius:12px;background:#d71920;color:#fff;font-weight:700;cursor:pointer}.auth-error{color:#c1121f;font-size:13px;min-height:18px;margin-bottom:8px}
+.guest-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;background:#f1f3f5;color:#555;font-size:12px;font-weight:700}
+.locked{pointer-events:none;opacity:.55}
+.audit-user{font-size:12px;color:#6b7280}
+.userBox{position:absolute;left:14px;right:14px;bottom:18px;padding:12px;border-radius:14px;background:#f8f9fb;border:1px solid var(--line)}
+.userBox .uName{font-weight:700;font-size:13px}
+.userBox .uRole{font-size:11px;color:var(--muted);margin:2px 0 10px}
+.userBox button{width:100%;padding:9px;border-radius:10px;background:#fff;border:1px solid var(--line);font-weight:700;font-size:12.5px;color:#c52335}
+.userBox button:hover{background:#fff0f1}
+@media(max-width:900px){.userBox{display:none}}
+.mobileLogoutBtn{display:none}
+@media(max-width:900px){.mobileLogoutBtn{display:block;position:fixed;top:14px;right:14px;z-index:15;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid var(--line);color:#c52335;font-weight:700;font-size:12px;box-shadow:var(--shadow)}}
+.printOnly{display:none}
+@media print{
+ .sidebar,.mobileNav,#mobileLogout,.userBox,.guest-badge,.modal,.toast{display:none!important}
+ .main{margin:0!important;width:100%!important;padding:0!important}
+ .page{display:none!important}
+ #laporan.page{display:block!important}
+ #laporan .top .actions,#laporan .toolbar{display:none!important}
+ .printOnly{display:block!important;margin-bottom:18px;border-bottom:2px solid #000;padding-bottom:12px}
+ .card{box-shadow:none!important;border:1px solid #ccc!important;break-inside:avoid}
+ body{background:#fff!important}
+}
+</style>
+
+<script>
+(function(){
+  const USERS = {
+    "Bendahara 1": {role:"Bendahara 1", passwordHash:"46da53532be4ae742f5ad4461393b0cddcf2ecea34d49b5c39bd8369c1314731"},
+    "Bendahara 2": {role:"Bendahara 2", passwordHash:"46da53532be4ae742f5ad4461393b0cddcf2ecea34d49b5c39bd8369c1314731"}
+  };
+  async function sha256Hex(str){
+    const buf=await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+    return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+  }
+  const SESSION_KEY="pmr_open_finance_session_v1";
+  let session = JSON.parse(localStorage.getItem(SESSION_KEY)||"null");
+
+  function auditUser(){
+    if(!session) return "Tamu";
+    return session.name + " (" + session.role + ")";
+  }
+
+  function ensureAuditFields(){
+    const raw=localStorage.getItem("pmr_open_finance_v2");
+    if(!raw) return;
+    try{
+      const s=JSON.parse(raw);
+      s.transactions=(s.transactions||[]).map(x=>({...x, lastModifiedBy:x.lastModifiedBy||"Data awal", lastModifiedAt:x.lastModifiedAt||null}));
+      s.events=(s.events||[]).map(x=>({...x, lastModifiedBy:x.lastModifiedBy||"Data awal", lastModifiedAt:x.lastModifiedAt||null}));
+      localStorage.setItem("pmr_open_finance_v2",JSON.stringify(s));
+    }catch(e){}
+  }
+
+  function setSession(s){
+    session=s;
+    localStorage.setItem(SESSION_KEY,JSON.stringify(s));
+    document.getElementById("authOverlay").style.display="none";
+    applyAccess();
+  }
+
+  function applyAccess(){
+    const isGuest=!session || session.mode==="guest";
+    document.body.dataset.role=isGuest?"guest":session.role;
+    document.querySelectorAll('[data-admin-only], .admin-only').forEach(el=>{
+      el.classList.toggle("locked",isGuest);
+      if("disabled" in el) el.disabled=isGuest;
+    });
+    const nav=document.querySelector("nav")||document.querySelector(".sidebar");
+    if(nav){
+      const existing=nav.querySelector(".guest-badge");
+      if(isGuest){
+        if(!existing){
+          const label=document.createElement("div");
+          label.className="guest-badge";
+          label.textContent="👁 Mode Tamu";
+          nav.prepend(label);
+        }
+      }else if(existing){
+        existing.remove();
+      }
+    }
+    const box=document.getElementById("userBox");
+    if(box){
+      if(isGuest){
+        box.innerHTML=`<div class="uName">Tamu</div><div class="uRole">Mode lihat saja</div><button onclick="PMRLogout()">Masuk sebagai Admin</button>`;
+      }else{
+        box.innerHTML=`<div class="uName">${session.name}</div><div class="uRole">${session.role}</div><button onclick="PMRLogout()">Keluar (Logout)</button>`;
+      }
+    }
+    window.PMRAuth={isGuest, user:auditUser, name: session?session.name:"Tamu"};
+  }
+  window.PMRApplyAccess=applyAccess;
+
+  window.PMRLogout=function(){
+    if(session && session.mode==="admin" && typeof db!=="undefined"){
+      db.logs.unshift({at:new Date().toLocaleString('id-ID'),user:session.name+" ("+session.role+")",text:"logout dari sistem."});
+      save();
+      if(typeof renderLogs==="function") renderLogs();
+    }
+    session=null;
+    localStorage.removeItem(SESSION_KEY);
+    document.getElementById("authUsername").value="";
+    document.getElementById("authPassword").value="";
+    document.getElementById("authError").textContent="";
+    document.getElementById("authOverlay").style.display="flex";
+    applyAccess();
+  };
+
+  document.getElementById("authLogin").onclick=async function(){
+    const name=document.getElementById("authUsername").value.trim();
+    const pass=document.getElementById("authPassword").value;
+    const u=USERS[name];
+    const hash=pass?await sha256Hex(pass):"";
+    if(!u || hash!==u.passwordHash){
+      document.getElementById("authError").textContent="Nama akun atau password salah.";
+      return;
+    }
+    setSession({name,role:u.role,mode:"admin",loginAt:new Date().toISOString()});
+    if(typeof db!=="undefined"){
+      db.logs.unshift({at:new Date().toLocaleString('id-ID'),user:name+" ("+u.role+")",text:"login ke sistem."});
+      save();
+      if(typeof renderLogs==="function") renderLogs();
+    }
+  };
+  document.getElementById("authGuest").onclick=function(){
+    setSession({name:"Tamu",role:"Viewer",mode:"guest",loginAt:new Date().toISOString()});
+  };
+
+  ensureAuditFields();
+  if(session) setSession(session);
+})();
+</script>
+
+<script>
+(function(){
+  const KEY="pmr_open_finance_v2";
+  window.PMRSetState=function(state, action, detail){
+    const s=typeof state==="string"?JSON.parse(state):state;
+    const who=window.PMRAuth && window.PMRAuth.user ? window.PMRAuth.user() : "Tamu";
+    const now=new Date().toISOString();
+    s.transactions=(s.transactions||[]).map(x=>({...x,lastModifiedBy:who,lastModifiedAt:now}));
+    s.events=(s.events||[]).map(x=>({...x,lastModifiedBy:who,lastModifiedAt:now}));
+    s.logs=s.logs||[];
+    s.logs.unshift({id:"LOG-"+Date.now(),action,detail,by:who,at:now});
+    localStorage.setItem(KEY,JSON.stringify(s));
+    return s;
+  };
+})();
+</script>
+</body>
+</html>
